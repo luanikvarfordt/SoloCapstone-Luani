@@ -23,15 +23,15 @@ export class pageObject {
     /** the selector for men size 8 of the soccer shoe searched - Nike Mercurial */
     ShoeSize: By = By.xpath('//label[text()="M 12.5 / W 14"]');
     /** the selector for "add to bag" button */
-    AddToBagButton: By = By.css('button[aria-label="Add to Bag"]');
+    AddToBagButton: By = By.xpath('(//button[@aria-label="Add to Bag"])');
     /** the selector to view items added in the bag */
-    ViewItems: By = By.css('button[data-test="qa-cart-view"]');
+    ViewItems: By = By.xpath('(//button[@data-test="qa-cart-view"])');
     /** the selector for the soccer shoe just added to the bag - Nike Mercurial */
     BagItem: By = By.css('p[class="product-title css-frggik e5pihrt0"]');
     /** the selector for the remove button to remove the soccer shoe from bag */
     RemoveButton: By = By.css('button[data-automation="desktop-remove-item-button"]');
     /** the selector for the message "there are no items in your bag" to verify that item was removed from bag */
-    EmptyBag: By = By.css('p[class="css-b2zj1a edp6lpb0"]');
+    EmptyBag: By = By.xpath('(//p[@data-automation="no-items"])');
 
 
     /** SIGN UP TEST SELECTORS */
@@ -86,6 +86,8 @@ export class pageObject {
         await this.driver.wait(until.elementIsVisible(await this.driver.findElement(this.SearchBar)));
     }
 
+
+ /** SEARCH TEST */    
     /** will find search bar, enter input to search and search */
     async searchFor(searchTerm: string) {
         await this.driver.findElement(this.SearchBar).sendKeys(`${searchTerm}`);
@@ -107,12 +109,18 @@ export class pageObject {
         return (await this.driver.findElement(elementBy)).click();
     }
 
+
+/** ADD TO BAG TEST */    
     /** will click on the soccer shoe desired - Nike Mercurial -, add to bag and
      * click on pop up view items in bag */
-    async AddToBag() {
+    async SelectShoeSize(){
         await this.driver.findElement(this.SoccerShoeResults).click();
-        await this.driver.wait(until.elementLocated(By.xpath('//label[text()="M 8 / W 9.5"]')));
+        await this.driver.sleep(5000);
+        await this.driver.wait(until.elementLocated(this.ShoeSize));
         await this.driver.findElement(this.ShoeSize).click();
+    }
+    async AddToBag() {
+        await this.driver.wait(until.elementLocated(this.AddToBagButton));
         await this.driver.findElement(this.AddToBagButton).click();
         await this.driver.findElement(this.ViewItems).click();
     }
@@ -128,7 +136,9 @@ export class pageObject {
         await this.driver.wait(until.elementLocated(this.EmptyBag));
     }
 
-    async GoToSignIn() {
+
+ /** SIGN UP TEST */   
+    async GoToSignUp() {
         await this.driver.wait(until.elementLocated(this.JoinUsHeader));
         await this.driver.findElement(this.JoinUsHeader).click();
         await this.driver.sleep(1000);
@@ -174,6 +184,8 @@ export class pageObject {
         await this.driver.wait(until.elementLocated(this.SignUpSuccesful));
     }
 
+
+/** SIGN IN TEST */       
     async SigningIn() {
         await this.driver.wait(until.elementLocated(this.SignInHeader));
         await this.driver.findElement(this.SignInHeader).click();

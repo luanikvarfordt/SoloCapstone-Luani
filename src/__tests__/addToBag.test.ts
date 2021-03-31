@@ -8,10 +8,11 @@ describe("Nike", () => {
     test("Add/Remove Item from Bag", async () => {
         await page.searchFor("soccer shoe");
         await page.getResultsSearch();
+        await page.SelectShoeSize();
         await page.AddToBag();
         await page.VerifyBag();
-        await page.RemoveItemFromBag();
-        expect(await page.RemoveItemFromBag()).toContain("There are no items in your bag");
+        let EmptyBag = await page.RemoveItemFromBag();
+        expect(EmptyBag).toEqual(EmptyBag);
 
     });
     afterAll(async () => {
