@@ -115,16 +115,17 @@ export class pageObject {
      * click on pop up view items in bag */
     async SelectShoeSize(){
         await this.driver.findElement(this.SoccerShoeResults).click();
-        await this.driver.sleep(5000);
+        await this.driver.sleep(6000);
         await this.driver.wait(until.elementLocated(this.ShoeSize));
         await this.driver.findElement(this.ShoeSize).click();
     }
     async AddToBag() {
+        await this.driver.sleep(5000);
         await this.driver.wait(until.elementLocated(this.AddToBagButton));
         await this.driver.findElement(this.AddToBagButton).click();
+        await this.driver.wait(until.elementLocated(this.ViewItems));
         await this.driver.findElement(this.ViewItems).click();
     }
-
     async VerifyBag() {
         await this.driver.wait(until.elementLocated(this.BagItem));
         await this.driver.wait(until.elementIsVisible(await this.driver.findElement(this.BagItem)));

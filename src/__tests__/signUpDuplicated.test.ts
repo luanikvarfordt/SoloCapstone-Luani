@@ -8,7 +8,7 @@ describe("Nike", () => {
     });
     test("Sign Up with used email", async () => {
         await page.driver.manage().window().maximize()
-        await page.GoToSignIn();
+        await page.GoToSignUp();
         await page.FillOutEmail("trialtrialtrialnike10@gmail.com");
         await page.FillOutPassword("TrialNike123456");
         let DuplicatedEmail = await page.DuplicatedEmailError();
