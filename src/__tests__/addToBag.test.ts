@@ -9,6 +9,7 @@ describe("Nike", () => {
         await page.searchFor("soccer shoe");
         await page.getResultsSearch();
         await page.SelectShoeSize();
+        //await page.driver.manage().window().maximize()
         await page.AddToBag();
         await page.VerifyBag();
         let EmptyBag = await page.RemoveItemFromBag();
@@ -16,6 +17,6 @@ describe("Nike", () => {
 
     });
     afterAll(async () => {
-        await page.driver.quit();
+        //await page.driver.quit();
     });
 });

@@ -1,5 +1,4 @@
-import { Browser } from "selenium-webdriver";
-import { pageObject } from "../pageObjects";
+`import { pageObject } from "../pageObjects";
 
 describe("Nike", () => {
     const page = new pageObject();
